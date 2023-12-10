@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMovieTheater } from "../../../api/apiLocal";
 import { Tabs } from "antd";
 import moment from "moment/moment";
+import { useNavigate } from "react-router-dom";
 const onChange = (key) => {
   console.log(key);
 };
@@ -24,6 +25,7 @@ const onChange = (key) => {
 // ];
 export default function TabMovie() {
   const [danhSachHeThongRap, setdanhSachHeThongRap] = useState([]);
+  let navigate = useNavigate();
 
   // useEffect : getMovieTheater  để lấy api từ server về
   useEffect(() => {
@@ -50,8 +52,15 @@ export default function TabMovie() {
               {phim.lstLichChieuTheoPhim
                 .slice(0, 4)
                 .map((lichChieuTheoPhim) => {
+                  // console.log(lichChieuTheoPhim);
+
                   return (
-                    <a className="jss220">
+                    <a
+                      onClick={() => {
+                        navigate("/datve/" + lichChieuTheoPhim.maLichChieu);
+                      }}
+                      className="jss220"
+                    >
                       <a className="text-green-500 font-medium">
                         {moment(lichChieuTheoPhim).format("LLL")}
                       </a>
@@ -72,14 +81,14 @@ export default function TabMovie() {
         label: <img src={heThongRap.logo} style={{ width: 50 }} />,
         children: (
           <Tabs
-            style={{ height: 500, }}
+            style={{ height: 500 }}
             tabPosition="left"
             items={heThongRap.lstCumRap.map((cumRap) => {
               return {
                 key: cumRap.tenCumRap,
                 label: (
                   <div className="text-left w-72 whitespace-normal">
-                    <p className="text-green-500 font-medium" >
+                    <p className="text-green-500 font-medium">
                       {cumRap.tenCumRap}
                     </p>
                     <p className="">{cumRap.diaChi}</p>

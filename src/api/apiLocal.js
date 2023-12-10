@@ -29,10 +29,18 @@ export let getMovieTheater = () => {
   });
 };
 
-export let getDataSlider = () => { 
+export let getDataSlider = () => {
   return axios({
     url: `${BASE_URL}/QuanLyPhim/LayDanhSachBanner`,
     method: "GET",
     headers: configHeader(),
-  })
- }
+  });
+};
+// dat ve
+export let getDetailLichChieu = (maLichChieu) => {
+  return axios({
+    url: `${BASE_URL}/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
+    method: "GET",
+    headers: configHeader(),
+  });
+};

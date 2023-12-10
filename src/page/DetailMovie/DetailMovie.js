@@ -6,7 +6,7 @@ import { Progress } from "antd";
 export default function DetailMovie() {
   // useParams => lấy id từ url
   let params = useParams();
-  console.log(params);
+  console.log("movie", params);
   const [detail, setDetail] = useState({});
 
   // gọi api lấy chi tiết phim
@@ -22,12 +22,18 @@ export default function DetailMovie() {
       });
   }, []);
   return (
-    <div style={{height:"100vh", width:"100vw"}} className="flex justify-between items-center p-28 bg-cyan-950">
+    <div
+      style={{ height: "100vh", width: "100vw" }}
+      className="flex justify-between items-center p-28 bg-cyan-950"
+    >
       <img className="w-1/3 aspect-square mt-12" src={detail.hinhAnh} />
       <Progress
-      size={350}
-      strokeColor={"yellow"}
-      type="circle" percent={detail.danhGia * 10} format={(percent) => <span className="text-white">{percent} ĐIỂM</span> }  />
+        size={350}
+        strokeColor={"yellow"}
+        type="circle"
+        percent={detail.danhGia * 10}
+        format={(percent) => <span className="text-white">{percent} ĐIỂM</span>}
+      />
     </div>
   );
 }

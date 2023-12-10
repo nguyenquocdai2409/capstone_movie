@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { getListMovie } from "../../../api/apiLocal";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function ListMovie() {
   //render danh sách movie
   const [movieArr, setMovieArr] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     getListMovie()
       .then((res) => {
@@ -22,9 +23,13 @@ export default function ListMovie() {
         <Card
           hoverable
           cover={
-            <img className="desktop:h-56 laptop:h-52 tablet:w-auto object-cover" alt="" src={item.hinhAnh} />
+            <img
+              className="desktop:h-56 laptop:h-52 tablet:w-auto object-cover"
+              alt=""
+              src={item.hinhAnh}
+            />
           }
-          // style={{ width: "230px" }}
+          // style={{ width: "260px" }}
         >
           <Meta
             className=""
@@ -39,18 +44,22 @@ export default function ListMovie() {
             }
           />
 
-          <NavLink to={`/movie/${item.maPhim}`}>
+          <div
+            onClick={() => {
+              navigate(`/movie/${item.maPhim}`);
+            }}
+          >
             <button className="bg-red-500 text-white w-full px-5 py-3 rounded mt-5">
               MUA VÉ
             </button>
-          </NavLink>
+          </div>
         </Card>
       );
     });
   };
   return (
     <div>
-      <div className=" container grid desktop:grid-cols-4 laptop:grid-cols-3 tablet:grid-cols-2 gap-10">
+      <div className=" container grid desktop:grid-cols-4 laptop:grid-cols-3 tablet:grid-cols-2 gap-5">
         {renderMovieArr()}
       </div>
     </div>

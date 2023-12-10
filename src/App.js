@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./page/Home/Home";
 import Login from "./page/Login/Login";
@@ -6,6 +6,7 @@ import DetailMovie from "./page/DetailMovie/DetailMovie";
 import Header from "./component/Header/Header";
 import Layout from "./template/Layout";
 import Register from "./page/Home/Register/Register";
+import OrderTickket from "./page/OrderTicket/OrderTicket";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               </Layout>
             }
           />
+          <Route path="*" element={<Navigate to="/" replace />} />
           <Route
             path="/movie/:id"
             element={
@@ -28,6 +30,15 @@ function App() {
               </Layout>
             }
           />
+          <Route
+            path="/datve/:maLichChieu"
+            element={
+              <Layout>
+                <OrderTickket />
+              </Layout>
+            }
+          />
+
           <Route
             path="/login"
             element={
